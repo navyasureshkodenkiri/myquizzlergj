@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(myquizler());
+void main() => runApp(Quizzler());
 
-class myquizler extends StatelessWidget {
+class Quizzler extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.red,
+        backgroundColor: Color.fromARGB(255, 226, 60, 60),
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5.0),
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: QuizPage(),
           ),
         ),
@@ -25,28 +25,14 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Icon> scoreKeeper = [
-    Icon(
-      Icons.check,
-      color: Color.fromARGB(255, 240, 170, 19),
-    ),
-    Icon(
-      Icons.close,
-      color: Color.fromARGB(255, 2, 31, 3),
-    ),
-    Icon(
-      Icons.close,
-      color: Color.fromARGB(255, 16, 228, 23),
-    ),
-    Icon(
-      Icons.close,
-      color: Color.fromARGB(255, 2, 31, 3),
-    ),
-    Icon(
-      Icons.close,
-      color: Color.fromARGB(255, 21, 183, 27),
-    ),
+  List<Icon> scoreKeeper = [];
+  List<String> question = [
+    'You can lead a cow down stairs but not up stairs.',
+    'Approximately one quarter of human bones are in the feet.',
+    'A slug\'s blood is green.',
   ];
+  int questionNumber = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -59,7 +45,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                question[questionNumber],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -86,14 +72,11 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true.
+                //good morning.
                 setState(() {
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ),
-                  );
+                  questionNumber++;
                 });
+                print(questionNumber);
               },
             ),
           ),
@@ -115,6 +98,10 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
+                setState(() {
+                  questionNumber++;
+                });
+                print(questionNumber);
               },
             ),
           ),
@@ -126,3 +113,8 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
+/*
+question1: 'You can lead a cow down stairs but not up stairs.', false,
+question2: 'Approximately one quarter of human bones are in the feet.', true,
+question3: 'A slug\'s blood is green.', true,
+*/
